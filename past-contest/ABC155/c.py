@@ -1,12 +1,15 @@
+from collections import Counter
+
 n = int(input())
-s_dic = {}
+s_list = []
+
 for i in range(n):
-    s = input()
-    if s not in s_dic:
-        s_dic[s] = 1
-    else:
-        s_dic[s] += 1
-max_s_list = [s[0] for s in s_dic.items() if s[1] == max(s_dic.values())]
-max_s_list.sort()
-for s in max_s_list:
-    print(s)
+    s_list.append(input())
+
+c = Counter(s_list)
+l = c.most_common()    
+count = l[0][1]
+l.sort()
+for i in l:
+    if count == i[1]:
+        print(i[0])
