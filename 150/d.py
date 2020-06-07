@@ -1,19 +1,15 @@
-import math
-def lcm(a, b):
-    return a // math.gcd(a, b) * b
+from math import gcd
 
 N, M = map(int, input().split())
-A = list(map(int, input().split()))
+A = [int(i) // 2 for i in input().split()]  
 
-A_half = [a // 2 for a in A]
-A_lcm = A_half[0]
-
-for i in range(1, N):
-    A_lcm = lcm(int(A_lcm), int(A_half[i]))
+A_lcm = 1
+for i in range(N):
+    A_lcm *= A[i] // gcd(A_lcm, A[i])
     
-for i in A_half:
+for i in A:
     if A_lcm // i % 2 == 0:
         print(0)
         exit()
-ans = (M // A_lcm + 1) // 2
-print(int(ans))
+
+print((M // A_lcm + 1) // 2)
