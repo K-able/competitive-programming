@@ -17,5 +17,5 @@ for i in range(N+1):
     if n < 0: break
     tmp = bisect.bisect_right(Bc, n) - 1
     ans = max(ans, i + tmp)
-    print(i, tmp, ans, n, Ac, Bc)
+    #print(i, tmp, ans, n, Ac, Bc)
 print(ans)
