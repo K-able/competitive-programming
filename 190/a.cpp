@@ -5,7 +5,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-    int a, b, c;
+    /*int a, b, c;
     cin >> a >> b >> c;
     string ans;
     if (a == b) {
@@ -22,5 +22,9 @@ int main() {
         }
     }
     cout << ans << endl;
+    */
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << (a + c > b ? "Takahashi" : "Aoki") << endl;
     return 0;
 }

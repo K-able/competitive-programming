@@ -5,7 +5,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-    int n, m;
+    /*int n, m;
     cin >> n >> m;
     vector<P> ab(m);
     rep(i,m) {
@@ -40,5 +40,28 @@ int main() {
         ans = max(ans, cnt);
     }
     cout << ans << endl;
+    */
+    int n, m;
+    cin >> n >> m;
+    vector<P> ab(m);
+    for (auto& [a,b] : ab) cin >> a >> b;
+    int k;
+    cin >> k;
+    vector<P> cd(k);
+    for (auto& [c,d] : cd) cin >> c >> d;
+
+    int ans = 0;
+    rep(bit,1<<k){
+        vector<bool> ball(n);
+        rep(i,k){
+            auto [c,d] = cd[i];
+            ball[bit & 1 << i ? c : d] = 1;
+        }
+        int cnt = 0;
+        for (auto [a,b] : ab) if (ball[a] && ball[b]) cnt++;
+        if (ans < cnt) ans = cnt;
+    }
+    cout << ans << endl;
+    
     return 0;
 }

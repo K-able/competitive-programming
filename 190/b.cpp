@@ -5,7 +5,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-    int n, s, d;
+    /*int n, s, d;
     cin >> n >> s >> d;
     vector<P> xy(n);
     rep(i,n) {
@@ -23,5 +23,17 @@ int main() {
         }
     }
     cout << ans << endl;
+    */
+    int n, s, d;
+    cin >> n >> s >> d;
+    rep(i,n) {
+        int x, y;
+        cin >> x >> y;
+        if (x < s && y > d) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+    }
+    cout << "No" << endl;
     return 0;
 }
