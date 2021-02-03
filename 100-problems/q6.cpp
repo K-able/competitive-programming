@@ -14,7 +14,7 @@ int main() {
         int a[3] = {i / 100, (i / 10) % 10, i % 10};
         int cnt = 0;
         rep(j,n) {
-            if (cnt <= 2 && a[cnt] == (int)(s[j])-'0') cnt++;
+            if (cnt <= 2 && a[cnt] == (int)(s[j]-'0')) cnt++;
         }
         if (cnt == 3) ans++;
     }
