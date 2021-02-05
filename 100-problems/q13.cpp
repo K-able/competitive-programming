@@ -19,15 +19,13 @@ int main() {
                 rep(k, b[j].size()) b[j][k] ^= 1; 
             }
         }
-        int same_cnt = 0;
-        int other_cnt = 0;
+        int cnt = 0;
         rep(j,c) {
-            int cnt = 0;
-            rep(k,r) cnt += b[k][j];
-            if (cnt == 0 || cnt == r) same_cnt++;
-            else other_cnt += cnt;
+            int cnt2 = 0;
+            rep(k,r) cnt2 += b[k][j];
+            cnt += max(cnt2, r - cnt2);
         }
-        ans = max(ans, same_cnt * r + other_cnt);
+        ans = max(ans, cnt);
     }
     cout << ans << endl;
 
