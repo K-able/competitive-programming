@@ -5,3 +5,4 @@
 q[0-9]*
 !*.cpp
 !*.py
+tempCodeRunnerFile*
