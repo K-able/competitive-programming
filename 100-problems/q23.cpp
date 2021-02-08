@@ -22,6 +22,11 @@ int main() {
     ll ans = 0;
     rep(i,q.size()) {
         ll q_s = m - q[i];
+        if (q_s < 0) continue;
+        auto iter = lower_bound(all(q), q_s) - 1;
+        ll q_t = *iter;
+        ans = max(ans, q[i] + q_t);
+        /*
         ll left = 0;
         ll right = q.size();
         while (right - left > 1) {
@@ -32,6 +37,7 @@ int main() {
         }
         if (q[i] + q[right] <= m) ans = max(ans, q[i] + q[right]);
         else if (q[i] + q[left] <= m) ans = max(ans, q[i] + q[left]);
+        */
     }
     cout << ans << endl;
 
