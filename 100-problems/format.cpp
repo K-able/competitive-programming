@@ -5,9 +5,10 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 using P = pair<int, int>;
+using Graph = vector<vector<int>>;
 
 const ll INF = LLONG_MAX;
-const ld eps = 1e-14;
+const ld EPS = 1e-14;
 
 int main() {
     

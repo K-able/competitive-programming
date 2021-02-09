@@ -3,6 +3,7 @@
 [a-f]
 [a-f]_ans
 q[0-9]*
+tempCodeRunnerFile*
+library/*
 !*.cpp
 !*.py
-tempCodeRunnerFile*
