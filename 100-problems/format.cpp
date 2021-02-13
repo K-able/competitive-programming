@@ -9,6 +9,8 @@ using Graph = vector<vector<int>>;
 
 const ll INF = LLONG_MAX;
 const ld EPS = 1e-14;
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
 
 int main() {
     

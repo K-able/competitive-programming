@@ -12,26 +12,7 @@ const ld EPS = 1e-14;
 int dx[4] = {0, 1, 0, -1};
 int dy[4] = {1, 0, -1, 0};
 
-vector<int> bfs(const Graph &g, int s) {
-    int n = (int)g.size();
-    vector<int> dist(n, -1);
-    queue<int> que;
-    dist[0] = 0;
-    que.push(0);
-
-    while (!que.empty()) {
-        int v = que.front();
-        que.pop();
-        for (int x : g[v]) {
-            if (dist[x] != -1) continue;
-            dist[x] = dist[v] + 1;
-            que.push(x);
-        }
-    }
-    return dist;
-}
-
-Graph bfs_2d(const vector<string> &g, int sy, int sx) {
+Graph bfs_2d(const vector<vector<char>> &g, int sy, int sx) {
     int h = (int)g.size();
     int w = (int)g[0].size();
     Graph dist(h, vector<int>(w, -1));
@@ -46,7 +27,7 @@ Graph bfs_2d(const vector<string> &g, int sy, int sx) {
         rep(i,4) {
             int ny = y + dy[i];
             int nx = x + dx[i];
-            if (g[ny][nx] == '#' || dist[ny][nx] != -1) continue;
+            if (g[ny][nx] == 'X' || dist[ny][nx] != -1) continue;
             dist[ny][nx] = dist[y][x] + 1;
             que.push(make_pair(ny,nx));
         }
@@ -55,17 +36,25 @@ Graph bfs_2d(const vector<string> &g, int sy, int sx) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    Graph g(n);
-    rep(i,m) {
-        int a, b;
-        cin >> a >> b;
-        g[a].push_back(b);
-        g[b].push_back(a);
+    int h, w, n;
+    cin >> h >> w >> n;
+    vector<vector<char>> g(h+2, vector<char>(w+2, 'X'));
+    vector<P> numbers(n+1);
+    for (int i = 1; i < h+1; ++i) {
+        for (int j = 1; j < w+1; ++j) {
+            char c;
+            cin >> c;
+            if (c == 'S') numbers[0] = {i, j};
+            if (0 < (int)(c - '0') && (int)(c - '0') <= 9) numbers[(int)(c - '0')] = {i, j};
+            g[i][j] = c;
+        }
     }
-    vector<int> dist = bfs(g, 0);
-    rep(v,n) cout << v << ": " << dist[v] << endl;
+    int ans = 0;
+    rep(i,n) {
+        Graph dist = bfs_2d(g, numbers[i].first, numbers[i].second);
+        ans += dist[numbers[i+1].first][numbers[i+1].second];
+    }
+    cout << ans << endl;
     
     return 0;
 }

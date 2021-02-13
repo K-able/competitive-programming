@@ -12,29 +12,10 @@ const ld EPS = 1e-14;
 int dx[4] = {0, 1, 0, -1};
 int dy[4] = {1, 0, -1, 0};
 
-vector<int> bfs(const Graph &g, int s) {
-    int n = (int)g.size();
-    vector<int> dist(n, -1);
-    queue<int> que;
-    dist[0] = 0;
-    que.push(0);
-
-    while (!que.empty()) {
-        int v = que.front();
-        que.pop();
-        for (int x : g[v]) {
-            if (dist[x] != -1) continue;
-            dist[x] = dist[v] + 1;
-            que.push(x);
-        }
-    }
-    return dist;
-}
-
-Graph bfs_2d(const vector<string> &g, int sy, int sx) {
-    int h = (int)g.size();
-    int w = (int)g[0].size();
-    Graph dist(h, vector<int>(w, -1));
+vector<vector<int>> bfs(const vector<string> &g, int sy, int sx) {
+    int r = (int)g.size();
+    int c = (int)g[0].size();
+    vector<vector<int>> dist(r, vector<int>(c, -1));
     queue<P> que;
     dist[sy][sx] = 0;
     que.push(make_pair(sy,sx));
@@ -55,17 +36,16 @@ Graph bfs_2d(const vector<string> &g, int sy, int sx) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    Graph g(n);
-    rep(i,m) {
-        int a, b;
-        cin >> a >> b;
-        g[a].push_back(b);
-        g[b].push_back(a);
-    }
-    vector<int> dist = bfs(g, 0);
-    rep(v,n) cout << v << ": " << dist[v] << endl;
+    int r, c;
+    cin >> r >> c;
+    int sy, sx, gy, gx;
+    cin >> sy >> sx;
+    cin >> gy >> gx;
+    --sy; --sx; --gy; --gx;
+    vector<string> g(r);
+    rep(i,r) cin >> g[i];
+    vector<vector<int>> dist = bfs(g, sy, sx);
+    cout << dist[gy][gx] << endl;
     
     return 0;
 }
