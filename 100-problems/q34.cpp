@@ -12,14 +12,14 @@ const ld EPS = 1e-14;
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-template<class T> void chmax(T& a, T b) {
-    if (a < b) a = b;
-}
-template<class T> void chmin(T& a, T b) {
-    if (a > b) a = b;
-}
-
 int main() {
-    
+    int n;
+    cin >> n;
+    vector<int> dp(n+1);
+    rep(i,0,n+1) {
+        if (i < 2) dp[i] = 1;
+        else dp[i] = dp[i-1] + dp[i-2];
+    }
+    cout << dp[n] << endl;
     return 0;
 }

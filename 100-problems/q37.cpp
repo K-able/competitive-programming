@@ -20,6 +20,17 @@ template<class T> void chmin(T& a, T b) {
 }
 
 int main() {
-    
+    int n, m;
+    cin >> n >> m;
+    vector<int> c(m);
+    rep(i,0,m) cin >> c[i];
+    vector<ll> dp(n+1, INF);
+    dp[0] = 0;
+    rep(i,0,m) {
+        rep(j,0,n+1) {
+            if (j+c[i] <= n) chmin(dp[j+c[i]], dp[j]+1);
+        }
+    }
+    cout << dp[n] << endl;
     return 0;
 }

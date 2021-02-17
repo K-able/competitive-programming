@@ -15,11 +15,20 @@ int dy[4] = {0, 1, 0, -1};
 template<class T> void chmax(T& a, T b) {
     if (a < b) a = b;
 }
-template<class T> void chmin(T& a, T b) {
-    if (a > b) a = b;
-}
 
 int main() {
-    
+    int n, w;
+    cin >> n >> w;
+    vector<int> value(n);
+    vector<int> weight(n);
+    rep(i,0,n) cin >> value[i] >> weight[i];
+    vector<int> dp(w+1, 0);
+    rep(i,0,n) {
+        rep(j,0,w+1) {
+            if (j + weight[i] <= w) chmax(dp[j+weight[i]], dp[j] + value[i]);
+        }
+    }
+    cout << dp[w] << endl;
+
     return 0;
 }
