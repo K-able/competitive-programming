@@ -13,10 +13,16 @@ const ld EPS = 1e-14;
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
-template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
+template<class T> void chmax(T& a, T b) {
+    if (a < b) a = b;
+}
+template<class T> void chmin(T& a, T b) {
+    if (a > b) a = b;
+}
 
 int main() {
-    
+    int n, i;
+    cin >> n >> i;
+    cout << n - i + 1 << endl;
     return 0;
 }

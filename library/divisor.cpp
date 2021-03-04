@@ -16,23 +16,18 @@ int dy[4] = {0, 1, 0, -1};
 template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
-vector<int> res;
-
-void prime_factor(int n) {
-    for (int i = 2; i*i <= n; ++i) {
-        while (n % i == 0) {
+vector<int> divisor(int n) {
+    vector<int> res;
+    for (int i = 1; i*i <= n; ++i) {
+        if (n % i == 0) {
             res.push_back(i);
-            n /= i;
+            if (i != n / i) res.push_back(n / i);
         }
     }
-    if (n != 1) res.push_back(n);
+    return res;
 }
 
 int main() {
-    ll n;
-    cin >> n;
-    prime_factor(n);
-    cout << n << ":";
-    rep(i,0,res.size()) cout << "　" << res[i];
+    
     return 0;
 }

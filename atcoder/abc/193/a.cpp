@@ -13,10 +13,17 @@ const ld EPS = 1e-14;
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
-template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
+template<class T> void chmax(T& a, T b) {
+    if (a < b) a = b;
+}
+template<class T> void chmin(T& a, T b) {
+    if (a > b) a = b;
+}
 
 int main() {
-    
+    ld a, b;
+    cin >> a >> b;
+    ld ans = (a - b) * 100 / a;
+    cout << fixed << setprecision(10) << ans << endl;
     return 0;
 }

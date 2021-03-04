@@ -33,6 +33,7 @@ int main() {
     cin >> n;
     prime_factor(n);
     cout << n << ":";
-    rep(i,0,res.size()) cout << "　" << res[i];
+    rep(i,0,res.size()) cout << " " << res[i];
+    cout << endl;
     return 0;
 }

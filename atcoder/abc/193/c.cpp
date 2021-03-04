@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define rep(i,s,n) for (int i = s; i < (n); ++i)
+#define all(x) (x).begin(), (x).end()
+using namespace std;
+using ll = long long;
+using ld = long double;
+using P = pair<int, int>;
+using Graph = vector<vector<int>>;
+using Matrix = vector<vector<int>>;
+
+const ll INF = LLONG_MAX;
+const ld EPS = 1e-14;
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+template<class T> void chmax(T& a, T b) {
+    if (a < b) a = b;
+}
+template<class T> void chmin(T& a, T b) {
+    if (a > b) a = b;
+}
+
+int main() {
+    ll n;
+    cin >> n;
+    vector<bool> is_search(100001, false);
+    ll count = 0;
+    rep(a,2,100001) {
+        if (is_search[a] == true) continue;
+        rep(b,2,40) {
+            ll ab = pow(a,b);
+            if (ab > n || ab < 0) break;
+            if (ab < 100001) is_search[ab] = true;
+            count++;
+        }
+    }
+    cout << n - count << endl;
+
+    return 0;
+}
