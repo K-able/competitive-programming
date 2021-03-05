@@ -17,7 +17,20 @@ int dy[4] = {0, 1, 0, -1};
 template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
+vector<int> cumsum(const vector<int> a) {
+    int n = a.size();
+    vector<int> s(n+1, 0);
+    rep(i,0,n) s[i+1] = s[i] + a[i];
+    return s;
+}
+
 int main() {
-    
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    rep(i,0,n) cin >> a[i];
+    vector<int> s = cumsum(a);
+    rep(i,0,n+1) cout << s[i] << " ";
+    cout << endl;
     return 0;
 }

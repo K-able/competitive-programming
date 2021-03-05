@@ -18,6 +18,18 @@ template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
 int main() {
-    
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    rep(i,0,n) cin >> a[i];
+    vector<ll> s(n+1);
+    rep(i,0,n) s[i+1] = s[i] + a[i];
+    rep(k,1,n+1) {
+        ll ans = 0;
+        rep(i,0,n) {
+            if (i+k <= n) chmax(ans, s[i+k]-s[i]);
+        }
+        cout << ans << endl;
+    }
     return 0;
 }

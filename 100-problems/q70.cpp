@@ -17,7 +17,19 @@ int dy[4] = {0, 1, 0, -1};
 template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
+ll modpow(ll a, ll n, ll mod) {
+    ll res = 1;
+    while (n > 0) {
+        if (n & 1) res = res * a % mod;
+        a = a * a % mod;
+        n >>= 1;
+    }
+    return res;
+}
+
 int main() {
-    
+    ll m, n;
+    cin >> m >> n;
+    cout << modpow(m, n, MOD) << endl;
     return 0;
 }
