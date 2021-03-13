@@ -10,7 +10,7 @@ using Matrix = vector<vector<int>>;
 
 const ll INF = LLONG_MAX;
 const ld EPS = 1e-14;
-const ll MOD = 1'000'000'007;
+const ll MOD = 1e9+7;
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
 
