@@ -18,24 +18,12 @@ template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
 int main() {
-    // submit
-    int a, b, w;
-    cin >> a >> b >> w;
-    w *= 1000;
-    if (w % a != 0 && w - (w/a) * a > (b-a) * (w/a)) cout << "UNSATISFIABLE" << endl;
-    else cout << w / b + (bool)(w % b) << " " << w / a << endl;
-    return 0;
-    // late
-    int l = INF, r = -INF;
-    rep(i,1,w+1) {
-        if (a*i <= w && w <= b*i) {
-            l = min(l, i);
-            r = max(r, i);
-        }
+    string x;
+    cin >> x;
+    rep(i,0,x.length()){
+        if (x[i] == '.') break;
+        cout << x[i];
     }
-    if (l == INF) cout << "UNSATISFIABLE" << endl;
-    else cout << l << " " << r << endl;
-    
+    cout << endl;
     return 0;
-
 }
