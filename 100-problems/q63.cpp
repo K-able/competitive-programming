@@ -29,36 +29,24 @@ template<class T> bool chmin(T& a, T b) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    int n;
+    cin >> n;
     vector<vector<ll>> dp(n, vector<ll>(n, INF));
-    rep(e,0,m) {
-        int a, b;
-        ll w;
-        cin >> a >> b >> w;
-        dp[a][b] = w;
-    }
-    rep(v,0,n) dp[v][v] = 0;
+    vector<vector<bool>> d(n, vector<bool>(n, false));
+    rep(i,0,n) rep(j,0,n) cin >> dp[i][j];
+    // warshall-floyd
+    bool flg = false;
     rep(k,0,n) {
         rep(i,0,n) {
             rep(j,0,n) {
-                chmin(dp[i][j], dp[i][k] + dp[k][j]);
+                if (dp[i][j] > dp[i][k] + dp[k][j]) flg = true;
+                if (dp[i][j] == dp[i][k] + dp[k][j] && dp[i][k] > 0 && dp[k][j] > 0) d[i][j] = true;
             }
         }
     }
-    bool exist_negative_cycle = false;
-    rep(v,0,n) if (dp[v][v] < 0) exist_negative_cycle = true;
-    if (exist_negative_cycle) {
-        cout << "NEGATIVE CYCLE" << endl;
-    } else {
-        rep(i,0,n) {
-            rep(j,0,n) {
-                if (j) cout << " ";
-                if (dp[i][j] < INF/2) cout << dp[i][j];
-                else cout << "INF";
-            }
-            cout << endl;
-        }
-    }
+    ll ans = 0;
+    if (flg) ans = -1;
+    else rep(i,0,n) rep(j,0,i+1) if (!d[i][j]) ans += dp[i][j];
+    cout << ans << endl;
     return 0;
 }

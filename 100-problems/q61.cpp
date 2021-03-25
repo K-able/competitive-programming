@@ -29,16 +29,19 @@ template<class T> bool chmin(T& a, T b) {
 }
 
 int main() {
+    // input, initialize
     int n, m;
     cin >> n >> m;
     vector<vector<ll>> dp(n, vector<ll>(n, INF));
     rep(e,0,m) {
-        int a, b;
-        ll w;
-        cin >> a >> b >> w;
-        dp[a][b] = w;
+        int a, b, t;
+        cin >> a >> b >> t;
+        a--; b--;
+        dp[a][b] = t;
+        dp[b][a] = t;
     }
     rep(v,0,n) dp[v][v] = 0;
+    // warshall-floyd
     rep(k,0,n) {
         rep(i,0,n) {
             rep(j,0,n) {
@@ -46,19 +49,12 @@ int main() {
             }
         }
     }
-    bool exist_negative_cycle = false;
-    rep(v,0,n) if (dp[v][v] < 0) exist_negative_cycle = true;
-    if (exist_negative_cycle) {
-        cout << "NEGATIVE CYCLE" << endl;
-    } else {
-        rep(i,0,n) {
-            rep(j,0,n) {
-                if (j) cout << " ";
-                if (dp[i][j] < INF/2) cout << dp[i][j];
-                else cout << "INF";
-            }
-            cout << endl;
-        }
+    ll ans = INF;
+    rep(i,0,n) {
+        ll ans_i = -1;
+        rep(j,0,n) ans_i = max(ans_i, dp[i][j]);
+        ans = min(ans, ans_i);
     }
+    cout << ans << endl;
     return 0;
 }

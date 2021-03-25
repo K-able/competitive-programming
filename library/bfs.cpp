@@ -12,12 +12,12 @@ const ld EPS = 1e-14;
 int dx[4] = {0, 1, 0, -1};
 int dy[4] = {1, 0, -1, 0};
 
-vector<int> bfs(const Graph &g, int s) {
+vector<int> bfs(const Graph g, int s) {
     int n = (int)g.size();
     vector<int> dist(n, -1);
     queue<int> que;
-    dist[0] = 0;
-    que.push(0);
+    dist[s] = 0;
+    que.push(s);
 
     while (!que.empty()) {
         int v = que.front();
