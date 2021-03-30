@@ -10,7 +10,8 @@
         "chrono": "cpp",
         "random": "cpp",
         "limits": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "tuple": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
