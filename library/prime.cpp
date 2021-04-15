@@ -25,7 +25,7 @@ bool check_is_prime(int n) {
     for (int i = 2; i*i <= n; ++i) {
         if (n % i == 0) return false;
     }
-    return true;
+    return n != 1;
 }
 
 map<int, int> prime_factor(int n) {

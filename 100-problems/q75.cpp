@@ -10,37 +10,12 @@ using Matrix = vector<vector<int>>;
 
 const ll INF = LLONG_MAX;
 const ld EPS = 1e-14;
-const ll MOD = 1'000'000'007;
+const int MOD = 1e9+7;
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
 
 template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
-
-ll modpow(ll a, ll n, ll mod) {
-    ll res = 1;
-    while (n > 0) {
-        if (n & 1) res = res * a % mod;
-        a = a * a % mod;
-        n >>= 1;
-    }
-    return res;
-}
-
-ll modinv(ll a, ll mod) {
-    return modpow(a, mod - 2, mod);
-}
-
-ll extGCD(ll a, ll b, ll &x, ll &y) {
-    if (b == 0) {
-        x = 1;
-        y = 0;
-        return a;
-    }
-    ll d = extGCD(b, a % b, y, x);
-    y -= a / b * x;
-    return d;
-}
 
 struct mint {
     ll x;
@@ -90,12 +65,41 @@ struct mint {
     }
 };
 
+int n;
+vector<int> to[200005];
+mint ans;
+
+int dfs(int v, int p = -1) {
+    int res = 1;
+    vector<int> ts;
+    for (int u : to[v]) {
+        if (u == p) continue;
+        int t = dfs(u, v);
+        res += t;
+        ts.push_back(t);
+    }
+    if (p != -1) {
+        ts.push_back(n - res);
+    }
+    mint now = mint(2).pow(n-1)-1;
+    for (int t : ts) {
+        now -= mint(2).pow(t)-1;
+    }
+    ans += now;
+    return res;
+}
+
 int main() {
-    cout << modpow(3, 45, MOD) << endl;
-    cout << modinv(3, MOD) << endl;
-    ll x, y;
-    extGCD(111, 30, x, y);
-    cout << x << "," << y << endl;
-    
+    cin >> n;
+    rep(i,0,n-1) {
+        int a, b;
+        cin >> a >> b;
+        --a; --b;
+        to[a].push_back(b);
+        to[b].push_back(a);
+    }
+    dfs(0);
+    ans /= mint(2).pow(n);
+    cout << ans.x << endl;
     return 0;
 }
