@@ -22,6 +22,7 @@ int main() {
     string s;
     cin >> n >> s >> q;
     int t2_count = 0;
+    // int fl = 0;
     rep(i,0,q) {
         int t, a, b;
         cin >> t >> a >> b;
@@ -32,11 +33,15 @@ int main() {
                 else a -= n;
                 if (b < n) b += n;
                 else b -= n;
+                // a = (a + n) % (2 * n)
+                // b = (b + n) % (2 * n)
             }
             char c_a = s[a]; char c_b = s[b];
             s[a] = c_b; s[b] = c_a;
+            // swap(s[a], s[b]);
         } else if (t == 2) {
             t2_count++;
+            // flg ^= 1;
         }
     }
     if (t2_count % 2 != 0) {
