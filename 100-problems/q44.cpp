@@ -8,7 +8,7 @@ using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 using Matrix = vector<vector<int>>;
 
-const int INF = 1e7;
+const int INF = 1e9;
 const ld EPS = 1e-14;
 const ll MOD = 1e9+7;
 int dx[4] = {-1, 0, 1, 0};
@@ -18,25 +18,25 @@ template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
 template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> d(n);
-    vector<int> c(m);
-    rep(i,0,n) cin >> d[i];
-    rep(i,0,m) cin >> c[i];
-    Matrix dp(n+10, vector<int>(m+10, INF));
-    rep(j,0,m+1) dp[0][j] = 0;
-    rep(i,0,n) {
-        rep(j,0,m) {
-            if (m - j > n - i) continue;
-            chmin(dp[i+1][j], dp[i][j] + d[i] * c[j]);
+    vector<int> dp(2001001, INF);
+    vector<int> dp_odd(2001001, INF);
+    rep(i,1,200) {
+        int x = i * (i+1) * (i+2) / 6;
+        dp[x] = 1;
+        if (x % 2 != 0) dp_odd[x] = 1;
+    }
+    for (int i = 200; i > 0; --i) {
+        int x = i * (i+1) * (i+2) / 6;
+        rep(j,x+1,1001001) {
+            chmin(dp[j], dp[x] + dp[j-x]);
+            chmin(dp_odd[j], dp_odd[x] + dp_odd[j-x]);
         }
     }
-    rep(i,0,n+1) {
-        rep(j,0,m+1) {
-            cout << dp[i][j] << " ";
-        }
-        cout << endl;
+    while (true) {
+        int n;
+        cin >> n;
+        if (n == 0) break;
+        cout << dp[n] << " " << dp_odd[n] << endl;
     }
     return 0;
 }

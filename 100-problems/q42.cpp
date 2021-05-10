@@ -8,7 +8,7 @@ using P = pair<int, int>;
 using Graph = vector<vector<int>>;
 using Matrix = vector<vector<int>>;
 
-const int INF = 1e7;
+const int INF = 1001001001;
 const ld EPS = 1e-14;
 const ll MOD = 1e9+7;
 int dx[4] = {-1, 0, 1, 0};
@@ -25,18 +25,15 @@ int main() {
     rep(i,0,n) cin >> d[i];
     rep(i,0,m) cin >> c[i];
     Matrix dp(n+10, vector<int>(m+10, INF));
-    rep(j,0,m+1) dp[0][j] = 0;
+    dp[0][0] = 0;
     rep(i,0,n) {
         rep(j,0,m) {
-            if (m - j > n - i) continue;
-            chmin(dp[i+1][j], dp[i][j] + d[i] * c[j]);
+            chmin(dp[i][j+1], dp[i][j]);
+            chmin(dp[i+1][j+1], dp[i][j] + d[i] * c[j]);
         }
     }
-    rep(i,0,n+1) {
-        rep(j,0,m+1) {
-            cout << dp[i][j] << " ";
-        }
-        cout << endl;
-    }
+    int ans = INF;
+    rep(j,0,m+1) chmin(ans, dp[n][j]);
+    cout << ans << endl;
     return 0;
 }
