@@ -20,6 +20,10 @@ ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a;}
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b;}
 
 int main() {
-    
+    int n, k;
+    cin >> n >> k;
+    int ans = 0;
+    rep(i,1,n+1) rep(j,1,k+1) ans += (i * 100 + j);
+    cout << ans << endl;
     return 0;
 }

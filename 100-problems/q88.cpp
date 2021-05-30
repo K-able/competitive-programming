@@ -20,6 +20,19 @@ ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a;}
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b;}
 
 int main() {
-    
+    int n;
+    cin >> n;
+    vector<int> table(n);
+    rep(i,0,n) {
+        int s;
+        cin >> s;
+        table[i] = s;
+        if (i % 2 == 0) continue;
+        for (int j = i - 1; j >= 0 && table[j] != s; --j) {
+            table[j] = s;
+        }
+    }
+    int ans = count(all(table), 0);
+    cout << ans << endl;
     return 0;
 }
